@@ -16,7 +16,7 @@ const ProductPage = () => {
     const existItem = state.cart.cartItems.find((x) => x.slug === product.slug)
     const quantity = existItem? existItem.quantity + 1 : 1;
     dispatch ({type: 'ADD_TO_CART', payload: {...product, quantity}});
-    router.push('/cart');
+    state.cart.cartItems.length < 1 && router.push('/cart');
   } 
   
  
