@@ -1,16 +1,16 @@
 import '../styles/globals.css'
 import Layout from '../components/Layout'
 import {Toaster} from 'react-hot-toast'
-import {StateContext} from '../context/StateContext'
+import { StoreProvider } from '../utils/store'
 
 function MyApp({ Component, pageProps }) {
   return (
-    <StateContext> 
+    <StoreProvider> 
     <Layout>
     <Toaster/> 
     <Component {...pageProps} />
   </Layout>
-  </StateContext>
+  </StoreProvider>
    ) 
 }
 
