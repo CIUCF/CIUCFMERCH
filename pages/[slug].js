@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import  { useRouter } from 'next/router';
+import  Router, { useRouter } from 'next/router';
 import { itemdata } from '../components/New/itemdata'
 import { Store } from '../utils/store';
 
@@ -7,6 +7,7 @@ import { Store } from '../utils/store';
 
 const ProductPage = () => {
   const {state, dispatch} = useContext(Store);
+  const router  = useRouter();
   const {query} = useRouter();
   const {slug} = query;
   const product = itemdata.find(x => x.slug === slug );
@@ -15,6 +16,7 @@ const ProductPage = () => {
     const existItem = state.cart.cartItems.find((x) => x.slug === product.slug)
     const quantity = existItem? existItem.quantity + 1 : 1;
     dispatch ({type: 'ADD_TO_CART', payload: {...product, quantity}});
+    router.push('/cart');
   } 
   
  
