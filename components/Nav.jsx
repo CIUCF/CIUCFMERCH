@@ -1,8 +1,9 @@
 import React from 'react'
 import vercel from '../public/vercel.svg'
-import Image from 'next/image'
 import { useContext } from 'react'
 import { Store } from '../utils/store'
+import Image from 'next/image'
+import Link from 'next/link'
 
 const Nav = () => {
   const {state, dispatch} = useContext(Store);
@@ -14,17 +15,21 @@ const Nav = () => {
 <div id='navbar' className='top-0 fixed z-10 '>
       <div className='bg-white h-16 p-4 w-screen flex  '> 
       <div className=' container items-center justify-between flex  '>  
-      <Image width={180} objectFit="contain" src={vercel} alt='well'  />
+      <Link href={'/'}> 
+      <div className='cursor-pointer'> <Image  width={180} objectFit="contain" src={vercel} alt='well'  /> </div> 
+      </Link>
       <div className='text-black flex justify-between  text-xl'>
         <ul className='flex gap-10'>
   <li>New</li>
   <li>Shop</li>
-  <li>CIUCF</li>
+  <li >CIUCF</li>
 </ul>
-<div ><a href={'/cart'}>Cart {cart.cartItems.length > 0 && (
+<div> <Link href={'/cart'}>
+  <div>Cart {cart.cartItems.length > 0 && (
 <span className='bg-black text-white'>
   {cart.cartItems.reduce ((a, c)=> a+c.quantity, 0)} </span>
-)}</a>
+)}</div>
+</Link>
 </div>
 </div>
      </div>
