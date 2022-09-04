@@ -1,22 +1,20 @@
-import React from 'react'
-import Nav from './Nav'
-import Footer from './Footer'
-import { useContext } from 'react'
-import { Store } from '../utils/store'
-import vercel from '../public/vercel.svg'
-
+import React from "react";
+import Nav from "./Nav";
+import Footer from "./Footer";
+import { useContext } from "react";
+import { Store } from "../utils/Store";
+import vercel from "../public/vercel.svg";
 
 const Layout = ({ children }) => {
-  const {state, dispatch} = useContext(Store);
-  const {cart} = state;
+  const { state, dispatch } = useContext(Store);
+  const { cart } = state;
   return (
-   
     <>
-   <Nav />
-    {children}
-    <Footer />
-  </>
-  )
-}
+      <Nav />
+      {children}
+      <Footer />
+    </>
+  );
+};
 
-export default Layout
+export default Layout;

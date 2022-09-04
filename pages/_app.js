@@ -1,17 +1,17 @@
-import '../styles/globals.css'
-import Layout from '../components/Layout'
-import {Toaster} from 'react-hot-toast'
-import { StoreProvider } from '../utils/store'
+import "../styles/globals.css";
+import Layout from "../components/Layout";
+import { Toaster } from "react-hot-toast";
+import { StoreProvider } from "../utils/Store";
 
 function MyApp({ Component, pageProps }) {
   return (
-    <StoreProvider> 
-    <Layout>
-    <Toaster/> 
-    <Component {...pageProps} />
-  </Layout>
-  </StoreProvider>
-   ) 
+    <StoreProvider>
+      <Layout>
+        <Toaster />
+        <Component {...pageProps} />
+      </Layout>
+    </StoreProvider>
+  );
 }
 
-export default MyApp
+export default MyApp;
