@@ -2,7 +2,9 @@ import React from 'react'
 import { itemdata } from './itemdata'
 import Item from './Item'
 
-const New = () => {
+const New = ({merch}) => {
+
+  
   return (
     <div className='container '>
     <div className='text-center mx-4 text-3xl  font-semibold'> New In</div>
@@ -11,11 +13,10 @@ const New = () => {
     </div>
     <div className='text-center  '> Check out our latest collection</div>
     <div className='my-8 grid md:grid-cols-2 lg:grid-cols-3 gap-6'>
-     {itemdata?.map((prod) =>  (
+     {merch.products?.map((product) =>  (
          <div>
-         <Item key={itemdata.slug}
-         {...prod}
-         />
+         <Item key={product.id}
+         product={product}/>
        </div> 
 
      ))}

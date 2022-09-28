@@ -1,25 +1,28 @@
 import React from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
+import { sanitize } from '../../utils/purify'
+import AddToCart from '../cart/add-to-cart'
 
 
-const Item = ({name,price,description,image,id, slug}) => {
+const Item = ({product}) => {
  
   return (
     <div> 
     <div className='h-[400px] group relative ' > 
-    <Link href={`/${slug}`}> 
+    {/* {eventsIndividual?.type === "A" && (<EventsA {...eventsIndividual}/>)} */}
+    {product?.images[0]&&(<Link href={`/${product?.slug}`}> 
     <a className=''>
         <Image  className=' h-96 w-full object-cover group-hover:scale-105 
         transition-transfrom duration-500 ease-in-out
-         cursor-pointer ' src={image} layout='fill' objectfit='cover' alt='well'  /> </a>
-     </Link>
+         cursor-pointer ' src={product?.images[0]} layout='fill' objectfit='cover' alt='well'  /> </a>
+     </Link>)}
      </div>
      <div className='mt-2 text-lg flex items-center justify-between'> 
-     <a href={`/${slug}`}><span> {name} </span>  </a>
-     <span className=' font-semibold'>₺{price} </span>
+     <a href={`/${product?.slug}`}><span> {product?.name} </span>  </a>
+     <div dangerouslySetInnerHTML={{__html:sanitize(product?.price_html)}}/>
      </div>
-     <div className='text-sm font-bold underline underline-offset-2'>Add to Cart</div>
+    <AddToCart product={product}/>
      </div>
   )
 }
