@@ -6,7 +6,7 @@ import { StoreProvider } from "../utils/Store";
 function MyApp({ Component, pageProps }) {
   return (
     
-      <Layout>
+      <Layout title="CIUCF Shop —  TShirts , Hoodies , Sweatshirts and many more —  CIUCF SHOP">
         <Toaster />
         <Component {...pageProps} />
       </Layout>

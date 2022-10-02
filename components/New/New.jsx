@@ -12,10 +12,10 @@ const New = ({merch}) => {
     <div className='h-1 place-self-center bg-black my-2 w-16'></div>
     </div>
     <div className='text-center  '> Check out our latest collection</div>
-    <div className='my-8 grid md:grid-cols-2 lg:grid-cols-3 gap-6'>
-     {merch.products?.map((product) =>  (
+    <div className='my-8 grid md:grid-cols-2 lg:grid-cols-2 gap-6'>
+     {merch.products?.slice(0, 2).map((product,index) =>  (
          <div>
-         <Item key={product.id}
+         <Item key={index}
          product={product}/>
        </div> 
 

@@ -1,29 +1,46 @@
-import React from 'react'
+import React, { useState } from 'react';
 import Link from 'next/link'
 import Image from 'next/image'
 import { sanitize } from '../../utils/purify'
 // import AddToCart from '../cart/add-to-cart'
 
-
+  
 const Item = ({product}) => {
- 
+
+  const [isHovering, setIsHovered] = useState(false);
+  const onMouseEnter = () => setIsHovered(true);
+  const onMouseLeave = () => setIsHovered(false);
   return (
+    
     <div> 
     <div className='h-[400px] group relative ' > 
     {product?.images[0]&&(<Link href={`/${product?.slug}`}> 
     <a className=''>
-        <Image  className=' h-96 w-full object-cover group-hover:scale-105 
-        transition-transfrom duration-500 ease-in-out
-         cursor-pointer ' src={product?.images[0]} layout='fill' objectfit='cover' alt='well'  /> </a>
+    <div
+      className="flex items-center flex-shrink-0 mr-6 cursor-pointer"
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
+    >
+        {isHovering ? (
+          <Image  className=' h-96 w-full object-cover group-hover:scale-105 
+          transition-transfrom duration-500 ease-in-out
+           cursor-pointer ' src={product?.images[0]} layout='fill' objectfit='cover' alt='well'  />
+        ) : (
+          <Image  className=' h-96 w-full object-cover group-hover:scale-105 
+          transition-transfrom duration-500 ease-in-out
+           cursor-pointer ' src={product?.images[1]} layout='fill' objectfit='cover' alt='well'  />
+        )}
+      
+    </div> </a>
      </Link>)}
      </div>
      <div className='mt-2 text-lg flex items-center justify-between'> 
      <a href={`/${product?.slug}`}><span> {product?.name} </span>  </a>
      <div dangerouslySetInnerHTML={{__html:sanitize(product?.price_html)}}/>
      </div>
-    {/* <AddToCart product={product}/> */}
      </div>
   )
 }
+
 
 export default Item
