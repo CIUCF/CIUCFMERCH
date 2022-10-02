@@ -7,6 +7,10 @@ export default function CartPage() {
   const {
     cart: { cartItems },
   } = state;
+  
+
+
+ 
 
   const removeItemHandler = (item) => {
     dispatch({ type: "REMOVE_FROM_CART", payload: item });
@@ -41,22 +45,22 @@ export default function CartPage() {
                 <div className="relative h-48">
                   {" "}
                   <a className="">
-                    <Image
+                 {item?.images[0] &&    <Image
                       className=" h-48 w-full object-cover group-hover:scale-105
         transition-transfrom duration-500 ease-in-out
          cursor-pointer "
-                      src={item.image}
+                      src={item?.images[0]}
                       layout="fill"
                       objectfit="cover"
                       alt="well"
-                    />{" "}
+                    />} 
                   </a>
                 </div>
                 <div className="col-span-2 text-left flex flex-col">
                   <span className="uppercase text-2xl tracking-wider">
-                    {item.name}{" "}
+              {item.name}<span className="lowercase font-thin">({item.colour}) </span>
                   </span>
-                  <span className="uppercase text-sm">Black (S) </span>
+                  <span className="text-sm">Size: <span className="uppercase ">{item.newsize} </span> </span>
                   <span
                     onClick={() => removeItemHandler(item)}
                     className="uppercase text-sm underline-offset-2 underline cursor-pointer hover:text-red-600"
@@ -65,7 +69,7 @@ export default function CartPage() {
                   </span>{" "}
                 </div>
                 <div> {item.quantity} </div>
-                <div>{item.price} </div>
+                <div> {parseInt(item.price) * parseInt(item.quantity)} </div>
               </div>
             </div>
           ))}

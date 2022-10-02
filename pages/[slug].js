@@ -1,85 +1,144 @@
-import React, { useContext } from "react";
-import Router, { useRouter } from "next/router";
-import { itemdata } from "../components/New/itemdata";
+import React, { useContext,useState } from "react";
 import { Store } from "../utils/Store";
+import Router, { useRouter } from "next/router";
+import toast, { Toaster } from "react-hot-toast";
+import axios from "axios";
+import {AiOutlineMinus,AiOutlinePlus} from "react-icons/ai";
+import Image from "next/image";
+import { GET_PRODUCTS_ENDPOINT } from '../src/constants/endpoints'
+import { sanitize } from "../utils/purify";
 
-const ProductPage = () => {
+const ProductPage = (merch) => {
   const { state, dispatch } = useContext(Store);
   const router = useRouter();
   const { query } = useRouter();
   const { slug } = query;
-  const product = itemdata.find((x) => x.slug === slug);
+  const product = merch.products.find((x) => x.slug === slug);
+  const notify = () => toast('Here is your toast.');
+
+  const [qty, setQty] = useState(1);
+
+  const incQty = () => {
+    setQty((prevQty) => prevQty + 1);
+  }
+
+  const decQty = () => {
+    setQty((prevQty) => {
+      if(prevQty - 1 < 1) return 1;
+     
+      return prevQty - 1;
+    });
+  }
 
   const addToCartHandler = () => {
-    const existItem = state.cart.cartItems.find((x) => x.slug === product.slug);
-    const quantity = existItem ? existItem.quantity + 1 : 1;
-    dispatch({ type: "ADD_TO_CART", payload: { ...product, quantity } });
-    state.cart.cartItems.length < 1 && router.push("/cart");
+
+    if(newsize){
+    const existItem = state.cart.cartItems.find((x) => x.unique === product.unique);
+    const quantity = existItem ? existItem.quantity + qty : qty;
+
+    dispatch({ type: "ADD_TO_CART", payload: { ...product, quantity, newsize,unique,colour } });
+    state.cart.cartItems.length < 1 && router.push("/cart");}
+    else{
+  notify;
+    }
   };
 
+  const [newsize, setNewSize]= useState("");
+  const [colour, setColour]= useState("");
+  const unique=[newsize,slug,colour];
+  
+
+  const handleChange = (e) =>{
+    setNewSize(e.target.value);
+  };
+
+  const handleColourChange = (e) =>{
+    setColour(e.target.value);
+  };
+
+  
+
+
   return (
+
     <div>
       <div className="container mx-auto m-10 mt-16">
         <div className="py-16 grid lg:grid-cols-2">
           <div className="flex gap-x-4  justify-end relative">
             <div>
               <a className="">
-                <img
-                  className=" h-96 w-full object-cover group-hover:scale-105
+              <Image  className=' h-96 w-full object-cover group-hover:scale-105 
         transition-transfrom duration-500 ease-in-out
-         cursor-pointer "
-                  src={product?.image}
-                  layout="fill"
-                  objectfit="cover"
-                  alt="well"
-                />{" "}
+         cursor-pointer ' src={product?.images[0]} layout='fill' objectfit='cover' alt='well'  />{" "}
               </a>
             </div>
-            {/* <div className='flex flex-col gap-y-4 '>
-{image.map((item, i) =>(
+            <div className='flex flex-col gap-y-4 '>
+{/* {image.map((item, i) =>(
 <img key={product.id} className='h-28 w-20  hover:opacity-80 object-cover
 cursor-pointer' src={shirt1} alt='products photos'/>
 
-))}
-</div> */}
+))} */}
+</div>
           </div>
           <div className="mt-12 mx-4 text-center">
             <span className="text-4xl font-semibold">{product?.name}</span>
-            <div className="my-4 text-2xl mx-auto">₺ {product?.price}.00 </div>
+            <div className="my-4 text-2xl mx-auto"> 
+            <div dangerouslySetInnerHTML={{__html:sanitize(product?.price_html)}}/> </div>
             <div className="py-4 border-black border-t-2 w-12 mx-auto "></div>
-            <div className="my-4 text-lg">{product?.description}</div>
+            <div className="my-4 text-lg">
+            <div dangerouslySetInnerHTML={{__html:sanitize(product?.short_description)}}/>
+            </div>
             <div>
               Size
-              <div>
-                <ul className="text-lg text-center flex justify-center flex-row gap-4  cursor-pointer mx-auto">
-                  <li> XS </li>
-                  <li> S </li>
-                  <li> M </li>
-                  <li> L </li>
-                  <li> XL </li>
-                  <li> XXL </li>
-                </ul>{" "}
+              <div className="my-4 flex gap-2 justify-center ">
+              
+
+              {product.acf.sizes?.map((size) =>  (
+                
+               <div >
+                    <input type="radio" id={size} name="sizes" value={size} className="hidden peer" required onChange={handleChange}/>
+                    <label for={size} className="inline-flex text-md  justify-center items-center h-10 w-10 bg-white border border-black cursor-pointer
+                     peer-checked:border-blue-600 hover:border-blue-600  peer-checked:text-blue-600 peer-checked:bg-blue-200 hover:text-blue-600 hover:bg-blue-100 ">                           
+                        <div className="uppercase">
+                            {size}
+                            <Toaster/>
+                        </div>
+                    </label>
+                
+                    </div>
+            ))}
               </div>
             </div>
-            <div className="py-4">
+            <div>
               Colour
-              <div>
-                <span className="text-black  text-md">
-                  <button className="w-24 h-8 border uppercase tracking-wider border-black bg-white ">
-                    Blue
-                  </button>
-                </span>
+              <div className="flex gap-2 justify-center ">
+              
+
+              {product.acf.colour?.map((colours) =>  (
+                
+               <div >
+                    <input type="radio" id={colours} name="colours" value={colours} className="hidden peer" required onChange={handleColourChange}/>
+                    <label for={colours} className="text-sm inline-flex justify-center items-center h-full w-full py-1 px-2 bg-white border border-black cursor-pointer
+                     peer-checked:border-red-600 hover:border-red-600 peer-checked:bg-red-200 peer-checked:text-red-600 hover:text-red-600 hover:bg-red-100 ">                           
+                        <div className="uppercase">
+                            {colours}
+                            <Toaster/>
+                        </div>
+                    </label>
+                
+                    </div>
+            ))}
               </div>
             </div>
-            {/* <div className="quantity">
+            <div className="quantity">
             <h3>Quantity:</h3>
-            <p className="quantity-desc">
-              <button className="minus" onClick={decQty}>Inc</button>
-              <span className="num">{qty}</span>
-              <button className="plus" onClick={incQty}>dec</button>
+            <p className="m-2">
+              <button className="inline-flex p-3 border border-black text-xl w-10 h-10 items-center justify-center" onClick={decQty}><AiOutlineMinus/></button>
+              <span className="mx-4 text-2xl">{qty}</span>
+              <button className="inline-flex p-3 border w-10 h-10 text-xl border-black items-center justify-center" onClick={incQty}><AiOutlinePlus/></button>
             </p>
-          </div> */}
-            <div className="flex flex-row gap-4 my-4 justify-center">
+          </div>
+           <div className="flex flex-row gap-4 my-4 justify-center">
               <span className="text-black  text-md">
                 <button
                   onClick={addToCartHandler}
@@ -98,7 +157,30 @@ cursor-pointer' src={shirt1} alt='products photos'/>
         </div>
       </div>
     </div>
-  );
-};
-
+    
+    );
+  };
+ 
 export default ProductPage;
+
+export async function getStaticPaths(){
+
+  return {
+      paths: [], //indicates that no page needs be created at build time
+      fallback: 'blocking' //indicates the type of fallback
+  }
+}
+
+export async function getStaticProps(){
+
+  const {data:data} = await axios.get(GET_PRODUCTS_ENDPOINT);
+
+  
+  
+  return {
+props: {products: data["products"]||{}},
+
+revalidate: 1,
+  };
+}
+

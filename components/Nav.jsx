@@ -1,5 +1,5 @@
 import React from "react";
-import vercel from "../public/vercel.svg";
+import Ciucf_shop from "../public/Ciucf_shop.png";
 import { useContext } from "react";
 import { Store } from "../utils/Store";
 import Image from "next/image";
@@ -13,20 +13,20 @@ const Nav = () => {
   return (
     <div>
       <div id="navbar" className="top-0 fixed z-10 ">
-        <div className="bg-white h-16 p-4 w-screen flex  ">
+        <div className="bg-white h-16 px-4 py-3 w-screen flex  ">
           <div className=" container items-center justify-between flex  ">
             <Link href={"/"}>
-              <div className="cursor-pointer">
+              <div className="cursor-pointer h-full">
                 {" "}
                 <Image
                   width={180}
                   objectFit="contain"
-                  src={vercel}
+                  src={Ciucf_shop}
                   alt="well"
                 />{" "}
               </div>
             </Link>
-            <div className="text-black flex gap-8 text-xl">
+            <div className="text-black flex gap-8 text-xl py-1">
               <ul className="tracking-wider flex gap-8">
                 <li>New</li>
                 <li>Shop</li>

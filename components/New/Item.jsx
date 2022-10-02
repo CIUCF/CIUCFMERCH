@@ -2,7 +2,7 @@ import React from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { sanitize } from '../../utils/purify'
-import AddToCart from '../cart/add-to-cart'
+// import AddToCart from '../cart/add-to-cart'
 
 
 const Item = ({product}) => {
@@ -10,7 +10,6 @@ const Item = ({product}) => {
   return (
     <div> 
     <div className='h-[400px] group relative ' > 
-    {/* {eventsIndividual?.type === "A" && (<EventsA {...eventsIndividual}/>)} */}
     {product?.images[0]&&(<Link href={`/${product?.slug}`}> 
     <a className=''>
         <Image  className=' h-96 w-full object-cover group-hover:scale-105 
@@ -22,7 +21,7 @@ const Item = ({product}) => {
      <a href={`/${product?.slug}`}><span> {product?.name} </span>  </a>
      <div dangerouslySetInnerHTML={{__html:sanitize(product?.price_html)}}/>
      </div>
-    <AddToCart product={product}/>
+    {/* <AddToCart product={product}/> */}
      </div>
   )
 }

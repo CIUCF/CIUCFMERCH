@@ -14,11 +14,12 @@ function reducer(state, action) {
     switch (action.type) {
         case 'ADD_TO_CART' : { 
             const newItem = action.payload;
+            console.log(newItem);
             const existItem = state.cart.cartItems.find(
-                (item) => item.slug === newItem.slug
+                (item) => item.unique === newItem.unique 
               );
               const cartItems = existItem ? state.cart.cartItems.map((item) =>
-                    item.slug === existItem.slug ? newItem : item
+                    item.unique === existItem.unique ? newItem : item
                   )
                 : [...state.cart.cartItems, newItem];
                 Cookies.set('cart',JSON.stringify( { ...state.cart, cartItems } ));
@@ -26,7 +27,7 @@ function reducer(state, action) {
         }
         case 'REMOVE_FROM_CART': {
             const cartItems = state.cart.cartItems.filter(
-              (item) => item.slug !== action.payload.slug
+              (item) => item.unique !== action.payload.unique
             );
             Cookies.set('cart',JSON.stringify( { ...state.cart, cartItems } ));
             return { ...state, cart: { ...state.cart, cartItems } };
