@@ -2,8 +2,7 @@ import React from "react";
 import Head from "next/head";
 import Nav from "./Nav";
 import Footer from "./Footer";
-import {   StoreProvider } from "../utils/Store";
-import vercel from "../public/vercel.svg";
+import {   StoreProvider } from "../../utils/Store";
 
 const Layout = ({ children,title,description }) => {
  

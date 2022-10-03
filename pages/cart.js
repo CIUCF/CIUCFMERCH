@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { Store } from "../utils/Store";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function CartPage() {
   const { state, dispatch } = useContext(Store);
@@ -23,21 +24,29 @@ export default function CartPage() {
         {" "}
         <div className="h-0.5  bg-black my-2 w-16"></div>{" "}
       </div>
-      {cartItems.length < 1 && (
-        <div className="empty-cart">
-          <h3>Your shopping bag is empty</h3>
-        </div>
-      )}
+      
 
       <div>
+      {cartItems.length >= 1 && (
         <div className="text-xl grid grid-cols-5 text-center">
           <span className="uppercase col-start-4 col-span-1 tracking-wider">
             {" "}
             Quantity
           </span>
           <span className="uppercase col-span-1 tracking-wider"> Total </span>
-        </div>
+        </div> )}
         <div className="h-0.5 place-self-center bg-black my-2 w-full"></div>
+        {cartItems.length < 1 && (
+       <div className="flex flex-col items-center justify-center">  <div className="flex items-center justify-center">
+          <h3>Your shopping bag is empty</h3>
+        </div>
+       <div className="my-5 flex items-center justify-center font-normal py-2 px-3 border cursor-pointer w-48 border-black">
+         <Link href={"/shop"}> 
+       <a> <div className=""> Continue Shopping</div>
+                </a>
+        </Link></div>
+        </div>
+      )}
         {cartItems.length >= 1 &&
           cartItems.map((item) => (
             <div className="h-48 my-5">

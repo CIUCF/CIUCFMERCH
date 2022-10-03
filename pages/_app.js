@@ -1,5 +1,5 @@
 import "../styles/globals.css";
-import Layout from "../components/Layout";
+import Layout from "../components/common/Layout";
 import { Toaster } from "react-hot-toast";
 import { StoreProvider } from "../utils/Store";
 

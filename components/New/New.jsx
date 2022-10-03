@@ -1,5 +1,4 @@
 import React from 'react'
-import { itemdata } from './itemdata'
 import Item from './Item'
 
 const New = ({merch}) => {

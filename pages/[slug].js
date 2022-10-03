@@ -97,8 +97,8 @@ cursor-pointer' src={shirt1} alt='products photos'/>
                 
                <div >
                     <input type="radio" id={size} name="sizes" value={size} className="hidden peer" required onChange={handleChange}/>
-                    <label for={size} className="inline-flex text-md  justify-center items-center h-10 w-10 bg-white border border-black cursor-pointer
-                     peer-checked:border-blue-600 hover:border-blue-600  peer-checked:text-blue-600 peer-checked:bg-blue-200 hover:text-blue-600 hover:bg-blue-100 ">                           
+                    <label for={size} className="inline-flex text-md  justify-center items-center h-10 w-10 bg-white cursor-pointer
+                     peer-checked:border-blue-600 hover:border-blue-600  peer-checked:text-blue-600 peer-checked:bg-blue-200 peer-checked:border  hover:bg-blue-100 ">                           
                         <div className="uppercase">
                             {size}
                             <Toaster/>

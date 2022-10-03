@@ -1,7 +1,7 @@
 import React from "react";
-import Ciucf_shop from "../public/Ciucf_shop.png";
+import Ciucf_shop from "../../public/Ciucf_shop.png";
 import { useContext } from "react";
-import { Store } from "../utils/Store";
+import { Store } from "../../utils/Store";
 import Image from "next/image";
 import Link from "next/link";
 import { BiCartAlt } from "react-icons/bi";
@@ -16,21 +16,31 @@ const Nav = () => {
         <div className="bg-white h-16 px-4 py-3 w-screen flex  ">
           <div className=" container items-center justify-between flex  ">
             <Link href={"/"}>
+              <a>
               <div className="cursor-pointer h-full">
-                {" "}
+                
                 <Image
                   width={180}
                   objectFit="contain"
                   src={Ciucf_shop}
                   alt="well"
-                />{" "}
-              </div>
+                />
+              </div> </a>
             </Link>
             <div className="text-black flex gap-8 text-xl py-1">
               <ul className="tracking-wider flex gap-8">
-                <li>New</li>
-                <li>Shop</li>
-                <li>Ciucf</li>
+              <Link href={"/"}>
+                <a> <div className=""> <li>New</li> </div>
+                </a>
+                </Link> 
+              <Link href={"/shop"}>
+                <a> <div className=""> <li>Shop</li> </div>
+                </a>
+                </Link>  
+                <Link href="https://ciucf.org">
+                <a> <div className=""> <li>Ciucf</li> </div>
+                </a>
+                </Link> 
               </ul>
               <div>
                 <Link href={"/cart"}>
