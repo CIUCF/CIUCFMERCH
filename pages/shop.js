@@ -2,7 +2,7 @@ import React from 'react'
 import ShopHeader from '../components/ShopHeader'
 import axios from 'axios'
 import { GET_PRODUCTS_ENDPOINT } from '../src/constants/endpoints'
-import Product from '../components/product'
+import Product from '../components/Product'
 
 const shop = (products) => {
   return (
