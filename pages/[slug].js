@@ -63,13 +63,13 @@ const ProductPage = (merch) => {
 
     <div>
       <div className="container mx-auto m-10 mt-16">
-        <div className="py-16 grid lg:grid-cols-2">
-          <div className="flex gap-x-4  justify-end relative">
-            <div>
-              <a className="">
-              <Image  className=' h-96 w-full object-cover group-hover:scale-105 
+        <div className="py-16 grid grid-cols-1 lg:grid-cols-2 relative">
+          <div className="  justify-end relative">
+            <div className="h-96 w-full object-cover group-hover:scale-105 
         transition-transfrom duration-500 ease-in-out
-         cursor-pointer ' src={product?.images[0]} layout='fill' objectfit='cover' alt='well'  />{" "}
+         cursor-pointer">
+              <a className="">
+              <Image  className=' object-cover ' src={product?.images[0]} layout='fill' objectfit='cover' alt='well'  />{" "}
               </a>
             </div>
             <div className='flex flex-col gap-y-4 '>

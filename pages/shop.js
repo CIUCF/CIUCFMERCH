@@ -19,8 +19,8 @@ const shop = (products) => {
         </span>
         <div className='my-8 grid md:grid-cols-2 lg:grid-cols-3 gap-6'>
         {products.products?.map((product) =>  (
-             <div>
-             <Product key={product.id}
+             <div key={product.id}>
+             <Product 
              product={product}/>
            </div> 
     

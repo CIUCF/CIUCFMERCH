@@ -29,11 +29,11 @@ export default function CartPage() {
       <div>
       {cartItems.length >= 1 && (
         <div className="text-xl grid grid-cols-5 text-center">
-          <span className="uppercase col-start-4 col-span-1 tracking-wider">
-            {" "}
+          <span className="md:block hidden uppercase col-start-4 col-span-1 tracking-wider">
+            
             Quantity
           </span>
-          <span className="uppercase col-span-1 tracking-wider"> Total </span>
+          <span className="md:block hidden  uppercase col-span-1 tracking-wider"> Total </span>
         </div> )}
         <div className="h-0.5 place-self-center bg-black my-2 w-full"></div>
         {cartItems.length < 1 && (
@@ -49,8 +49,8 @@ export default function CartPage() {
       )}
         {cartItems.length >= 1 &&
           cartItems.map((item) => (
-            <div className="h-48 my-5">
-              <div className="text-xl grid grid-cols-5 text-center gap-5 items-center">
+            <div className="h-48 my-5" key={item.id}>
+              <div className="text-xl grid grid-cols-3 lg:grid-cols-5 text-center gap-5 items-center">
                 <div className="relative h-48">
                   {" "}
                   <a className="">
@@ -69,16 +69,21 @@ export default function CartPage() {
                   <span className="uppercase text-2xl tracking-wider">
               {item.name}<span className="lowercase font-thin">({item.colour}) </span>
                   </span>
-                  <span className="text-sm">Size: <span className="uppercase ">{item.newsize} </span> </span>
+                  <div className="flex flex-col">
+                    <span className="text-sm ">Size: <span className="uppercase ">{item.newsize} </span></span>
+                  <span className="text-sm md:hidden ">Quantity: <span className="uppercase ">{item.quantity} </span></span>
+                  <span className="text-sm md:hidden">Total Price: <span className="uppercase ">
+                  ₺{parseInt(item.price) * parseInt(item.quantity)} </span></span>
+                    
                   <span
                     onClick={() => removeItemHandler(item)}
                     className="uppercase text-sm underline-offset-2 underline cursor-pointer hover:text-red-600"
                   >
                     Remove{" "}
-                  </span>{" "}
+                  </span></div>
                 </div>
-                <div> {item.quantity} </div>
-                <div> {parseInt(item.price) * parseInt(item.quantity)} </div>
+                <div className="md:block hidden "> {item.quantity} </div>
+                <div className="md:block hidden "> ₺{parseInt(item.price) * parseInt(item.quantity)} </div>
               </div>
             </div>
           ))}

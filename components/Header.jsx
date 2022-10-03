@@ -6,7 +6,7 @@ const Header = () => {
   return (
     <div className='h-screen overflow-hidden bg-[#00000084]'>
         <div className='  overflow-hidden h-full w-full'>
-            <Image className=' mix-blend-overlay' src={Home_header} alt='Hero Image'  layout='fill' objectFit='cover'/>
+            <Image className='overflow-hidden mix-blend-overlay' src={Home_header} alt='Hero Image'  layout='fill' objectFit='cover'/>
             <div className=' absolute pt-16 text-white top-0 left-0 justify-center flex flex-col h-full w-full items-center '> 
             <span className='text-2xl p-4'> New Merch</span>
             <span className='text-4xl md:text-7xl p-4'>"Glory to Glory"</span>
