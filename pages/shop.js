@@ -3,6 +3,7 @@ import ShopHeader from '../components/ShopHeader'
 import axios from 'axios'
 import { GET_PRODUCTS_ENDPOINT } from '../src/constants/endpoints'
 import Product from '../components/Product'
+import { getProductsData } from '../utils/fetcher/productcall'
 
 const shop = (products) => {
   return (
@@ -36,13 +37,14 @@ export default shop
 
 export async function getStaticProps(){
 
-    const {data:data} = await axios.get(GET_PRODUCTS_ENDPOINT);
+  const {data:data} = await getProductsData();
+
   
-    
-    
-    return {
-  props: {products: data["products"]??{}},
   
-  revalidate: 1,
-    };
-  }
+  return {
+props: {products:  data ?? {}},
+
+
+revalidate: 1,
+  };
+}

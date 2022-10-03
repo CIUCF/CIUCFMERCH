@@ -5,7 +5,7 @@ import Info from '../components/Info'
 import New from '../components/New/New'
 import Newsletter from '../components/Newsletter'
 import axios from 'axios'
-import { GET_PRODUCTS_ENDPOINT } from '../src/constants/endpoints'
+import { getProductsData } from '../utils/fetcher/productcall'
 
 
 export default function Home(products ) {
@@ -25,13 +25,16 @@ export default function Home(products ) {
 
 export async function getStaticProps(){
 
-  const {data:data} = await axios.get(GET_PRODUCTS_ENDPOINT);
+  const {data:data} = await getProductsData();
 
   
   
   return {
-props: {products: data["products"]??{}},
+props: {products:  data ?? {}},
+
 
 revalidate: 1,
   };
 }
+
+
