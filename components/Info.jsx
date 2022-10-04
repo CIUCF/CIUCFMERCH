@@ -4,7 +4,7 @@ import wearMandate from '../public/wearMandate.jpeg'
 
 const Info = () => {
   return (
-    <div className='container'>
+    <div className=' container'>
 <div className='grid md:grid-cols-2 gap-4 items-center text-center'> 
 
 <div className='mb-8 md:my-16 shadow-2xl  w-full col-span-1 h-96  md:h-[500px] mx-auto relative overflow-hidden'> 

@@ -4,7 +4,7 @@ import Home_header from '../public/Home_header.jpg'
 
 const Header = () => {
   return (
-    <div className='h-screen overflow-hidden bg-[#00000084]'>
+    <div className='h-[100vh] flex overflow-hidden bg-[#00000084]'>
         <div className='  overflow-hidden h-full w-full'>
             <Image className='overflow-hidden mix-blend-overlay' src={Home_header} alt='Hero Image'  layout='fill' objectFit='cover'/>
             <div className=' absolute pt-16 text-white top-0 left-0 justify-center flex flex-col h-full w-full items-center '> 
