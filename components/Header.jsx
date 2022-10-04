@@ -11,7 +11,7 @@ const Header = () => {
             <span className='text-2xl p-4'> New Merch</span>
             <span className='text-4xl md:text-7xl p-4'>"Glory to Glory"</span>
             <span className='text-black text-xl p-4' >
-              <a href={"/shop"} className='px-4 py-2 bg-white hover:bg-red-200'>Shop Now</a></span>
+              <a href={"/newin"} className='px-4 py-2 bg-white hover:bg-red-200'>Shop Now</a></span>
             </div>
         </div>
        
