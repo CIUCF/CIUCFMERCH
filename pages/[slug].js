@@ -14,7 +14,12 @@ const ProductPage = (merch) => {
   const { query } = useRouter();
   const { slug } = query;
   const product = merch.products.find((x) => x.slug === slug);
+  
+ 
+ 
   const notify = () => toast('Here is your toast.');
+
+  
 
   const [qty, setQty] = useState(1);
 
@@ -31,21 +36,29 @@ const ProductPage = (merch) => {
   }
 
   const addToCartHandler = () => {
+   
 
-    if(newsize){
+    if(newsize && colour){
     const existItem = state.cart.cartItems.find((x) => x.unique === product.unique);
     const quantity = existItem ? existItem.quantity + qty : qty;
+    const price = product.price;
+    const  totalPrice = parseInt(price) * parseInt(quantity);
+    
 
-    dispatch({ type: "ADD_TO_CART", payload: { ...product, quantity, newsize,unique,colour } });
+    dispatch({ type: "ADD_TO_CART", payload: { ...product, quantity, newsize,unique,colour,totalPrice } });
     state.cart.cartItems.length < 1 && router.push("/cart");}
     else{
   notify;
     }
   };
 
+  
+  
+
   const [newsize, setNewSize]= useState("");
   const [colour, setColour]= useState("");
   const unique=[newsize,slug,colour];
+  
   
 
   const handleChange = (e) =>{
@@ -65,11 +78,11 @@ const ProductPage = (merch) => {
       <div className="container mx-auto m-10 mt-16">
         <div className="py-16 grid grid-cols-1 lg:grid-cols-2 relative">
           <div className="  justify-end relative">
-            <div className="h-96 w-full object-cover group-hover:scale-105 
+            <div className="h-60 md:h-80 lg:h-96 w-full object-cover group-hover:scale-105 
         transition-transfrom duration-500 ease-in-out
          cursor-pointer">
               <a className="">
-              <Image  className=' object-cover ' src={product?.images[0]} layout='fill' objectfit='cover' alt='well'  />{" "}
+              <Image  className='object-cover md:object-contain lg:object-cover ' src={product?.images[0]} layout='fill' objectfit='cover' alt='well'  />{" "}
               </a>
             </div>
             <div className='flex flex-col gap-y-4 '>
@@ -135,6 +148,7 @@ cursor-pointer' src={shirt1} alt='products photos'/>
             <p className="m-2">
               <button className="inline-flex p-3 border border-black text-xl w-10 h-10 items-center justify-center" onClick={decQty}><AiOutlineMinus/></button>
               <span className="mx-4 text-2xl">{qty}</span>
+              
               <button className="inline-flex p-3 border w-10 h-10 text-xl border-black items-center justify-center" onClick={incQty}><AiOutlinePlus/></button>
             </p>
           </div>
@@ -142,13 +156,13 @@ cursor-pointer' src={shirt1} alt='products photos'/>
               <span className="text-black  text-md">
                 <button
                   onClick={addToCartHandler}
-                  className="px-4 w-48 py-2 h-12 border uppercase tracking-widest border-black bg-white"
+                  className="md:px-4 md:w-48 py-2 w-36 h-12 border uppercase tracking-widest border-black bg-white"
                 >
                   Add to Cart
                 </button>
               </span>
               <span className="text-white text-md  ">
-                <button className="px-4 py-2 w-48 h-12 tracking-widest bg-black uppercase">
+                <button className="md:px-4 py-2 md:w-48 h-12 w-36 tracking-widest bg-black uppercase">
                   Buy Now
                 </button>
               </span>
@@ -160,7 +174,7 @@ cursor-pointer' src={shirt1} alt='products photos'/>
     
     );
   };
- 
+  
 export default ProductPage;
 
 export async function getStaticPaths(){

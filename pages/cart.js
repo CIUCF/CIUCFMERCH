@@ -10,7 +10,7 @@ export default function CartPage() {
   } = state;
   
 
-
+console.log(cartItems);
  
 
   const removeItemHandler = (item) => {
@@ -73,7 +73,7 @@ export default function CartPage() {
                     <span className="text-sm ">Size: <span className="uppercase ">{item.newsize} </span></span>
                   <span className="text-sm md:hidden ">Quantity: <span className="uppercase ">{item.quantity} </span></span>
                   <span className="text-sm md:hidden">Total Price: <span className="uppercase ">
-                  ₺{parseInt(item.price) * parseInt(item.quantity)} </span></span>
+                  ₺{item.totalPrice} </span></span>
                     
                   <span
                     onClick={() => removeItemHandler(item)}
@@ -83,11 +83,19 @@ export default function CartPage() {
                   </span></div>
                 </div>
                 <div className="md:block hidden "> {item.quantity} </div>
-                <div className="md:block hidden "> ₺{parseInt(item.price) * parseInt(item.quantity)} </div>
+                <div className="md:block hidden "> ₺{item.totalPrice}</div>
               </div>
             </div>
           ))}
         <div className="h-0.5 place-self-center bg-black my-2 w-full"></div>
+        {cartItems.length >= 1 && (
+       <div className="grid "> 
+       <span className=" text-xl grid grid-cols-5 text-center">
+        <span className="uppercase col-start-4 col-span-1 tracking-wider">  SUBTOTAL</span> 
+        <span>300</span>
+        </span>
+       </div>
+      )}
       </div>
     </div>
   );
